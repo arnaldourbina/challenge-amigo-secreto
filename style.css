@@ -91,6 +91,10 @@ body {
     width: 300px;
     justify-content: center;
 }
+.button-reinicar {
+    width: 300px;
+    justify-content: center;
+}
 
 /* Estilos de entrada de texto */
 .input-title {
