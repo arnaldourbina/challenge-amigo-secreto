@@ -1,41 +1,42 @@
 // El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
 let amigos = [];
 
-let lista = document.getElementById('listaAmigos');
+function agregarAmigo(){
+    let inputAmigo = document.getElementById("amigo");
+    let nombreAmigo = inputAmigo.value;
 
-function agregarAmigo() {
-    let nombre = document.getElementById('amigo').value
-    if(nombre == ''){
-        alert('Por favor, inserte un nombre');
-    } else if (amigos.includes(nombre)) {
-        alert('Error este nombre ya está en la lista')
-    } else {
-        amigos.push(nombre);
-        document.getElementById('amigo').value = '';
-        actualizarAmigos();
+    if (!nombreAmigo){ 
+        alert("Debes ingresar un nombre");
+        return;
     }
-}
+   amigos.push(nombreAmigo);
+   inputAmigo.value = "";
+   inputAmigo.focus();
+   renderizarAmigos();
+   }
 
-function actualizarAmigos() {
-    lista.innerHTML = ""
-    
-    for(let i = 0; i < amigos.length; i++){
-        let li = document.createElement('li');
-        li.textContent = amigos[i];
-        lista.appendChild(li);
-    }
-}
+   function renderizarAmigos(){
+     let listaAmigos = document.getElementById("listaAmigos");
+     listaAmigos.innerHTML = "";
 
-function sortearAmigo() {
+     for (let i = 0; i < amigos.length; i++) {
+        let item = document.createElement("li");
+        item.textContent = amigos[i];
+        listaAmigos.appendChild(item);
+
+
+     }
+   }
+
+   function sortearAmigo() {
     if(amigos.length === 0){
-        alert('La lista no puede estar vacia, por favor agregue amigos.');
-    } else if (amigos.length === 1) {
-        alert('Debe tener al menos 2 amigos para sortear')
-    } else {
-        let random = Math.floor(Math.random() * amigos.length)
-        let resultado = document.getElementById('resultado');
-        resultado.innerHTML = `¡El amigo sorteado es: ${amigos[random]}!`;
-        amigos.splice(random, 1);
-        actualizarAmigos();
+        alert("No hay amigos para sortear");
+        return;
     }
+    let amigoSorteado = amigos[Math.floor(Math.random() * amigos.length)];
+    let resultado = document.getElementById("resultado");
+    resultado.innerHTML = "El amigo sorteado es: " + amigoSorteado;  
+
+    let limpiarLista = document.getElementById("listaAmigos");
+    limpiarLista.innerHTML = "";
 }
